@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: error
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: error
+  template:
+    metadata:
+      labels:
+        app: error
+    spec:
+      containers:
+        - name: alpine
+          image: alpine:latest
+          command: [ "/bin/bash", "-c" ]
+          args:
+            - |
+            while true; do
+            source /etc/secrets/db_creds.sh && \
+            docker-php-entrypoint apache2-foreground
+            done
