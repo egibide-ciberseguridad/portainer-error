@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -18,7 +19,4 @@ spec:
           command: [ "/bin/bash", "-c" ]
           args:
             - |
-            while true; do
-            source /etc/secrets/db_creds.sh && \
-            docker-php-entrypoint apache2-foreground
-            done
+            echo "crash"
